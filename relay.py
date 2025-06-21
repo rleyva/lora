@@ -43,6 +43,7 @@ import adafruit_rfm9x
 import adafruit_ssd1306
 import board
 import busio
+import logging
 import socket
 import time
 
@@ -150,6 +151,7 @@ def run(bonnet: LoraBonnet):
             bonnet.display.text('RX: ', 0, 0, 1)
             bonnet.display.text(packet_text, 25, 0, 1)
             
+            logging.info(f"Received: {packet_text}")
             time.sleep(1)
 
         if not bonnet.button_a.value:
@@ -160,6 +162,8 @@ def run(bonnet: LoraBonnet):
             bonnet.rfm9x.send(button_a_data)
             
             bonnet.display.text('Sent Button A!', 25, 15, 1)
+            logging.info(f"Sent: {str(button_a_data, 'utf-8')}")
+
         elif not bonnet.button_b.value:
             # Send Button B
             bonnet.display.fill(0)
@@ -168,6 +172,8 @@ def run(bonnet: LoraBonnet):
             bonnet.rfm9x.send(button_b_data)
             
             bonnet.display.text('Sent Button B!', 25, 15, 1)
+            logging.info(f"Sent: {str(button_b_data, 'utf-8')}")
+        
         elif not bonnet.button_c.value:
             # Send Button C
             bonnet.display.fill(0)
@@ -176,11 +182,13 @@ def run(bonnet: LoraBonnet):
             bonnet.rfm9x.send(button_c_data)
             
             bonnet.display.text('Sent Button C!', 25, 15, 1)
+            logging.info(f"Sent: {str(button_c_data, 'utf-8')}")
 
         bonnet.display.show()
         time.sleep(0.1)
 
 
 if __name__=='__main__':
+    logging.basicConfig(level=logging.INFO)
     bonnet = setup()
     run(bonnet)
