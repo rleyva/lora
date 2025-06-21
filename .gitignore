@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+env/
+venv/
+setup/
+setup-env
+
+# UV-specific cache (optional)
+.uv/
+uv.lock
+
+# ???
+.python-version
+lora.egg-info/
